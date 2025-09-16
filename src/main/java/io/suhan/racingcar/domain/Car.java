@@ -1,4 +1,4 @@
-package io.suhan.racingcar;
+package io.suhan.racingcar.domain;
 
 import io.suhan.racingcar.generator.NumberGenerator;
 import io.suhan.racingcar.generator.RandomNumberGenerator;
@@ -22,7 +22,10 @@ public class Car {
     }
 
     public static Car of(String name, NumberGenerator generator) {
-        if (name.length() > CAR_NAME_MAXIMUM_LENGTH) throw new IllegalArgumentException("Car name length must be shorter than " + CAR_NAME_MAXIMUM_LENGTH);
+        if (name.length() > CAR_NAME_MAXIMUM_LENGTH) {
+            throw new IllegalArgumentException("자동차의 이름은 " + CAR_NAME_MAXIMUM_LENGTH + "자 이하만 가능합니다.");
+        }
+
         return new Car(name, generator);
     }
 

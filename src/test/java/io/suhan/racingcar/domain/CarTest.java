@@ -1,4 +1,4 @@
-package io.suhan.racingcar;
+package io.suhan.racingcar.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -47,8 +47,6 @@ public class CarTest {
 
     @Test
     void 자동차의_이름은_5자_이하만_가능하다() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Car car = Car.of("123456");
-        });
+        assertThrows(IllegalArgumentException.class, () -> Car.of("123456"));
     }
 }

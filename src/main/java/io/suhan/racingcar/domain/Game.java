@@ -1,9 +1,11 @@
-package io.suhan.racingcar;
+package io.suhan.racingcar.domain;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Game {
+    private static final int GAME_ROUNDS_MINIMUM = 1;
+
     private final CarRegistry carRegistry;
     private final int rounds;
 
@@ -13,24 +15,26 @@ public class Game {
     }
 
     public static Game of() {
-        return new Game(0);
+        return Game.of(1);
     }
 
     public static Game of(int rounds) {
+        if (rounds < GAME_ROUNDS_MINIMUM) {
+            throw new IllegalArgumentException("시도 회수는 " + GAME_ROUNDS_MINIMUM + " 이상이어야 합니다.");
+        }
+
         return new Game(rounds);
     }
 
-    public void execute() {
-        System.out.println("\n실행 결과");
-        for (int i = 0; i < this.rounds; i++) {
+    public List<RoundResult> execute() {
+        List<RoundResult> results = new ArrayList<>();
+
+        for (int i = 0; i < rounds; i++) {
             carRegistry.moveCars();
-            carRegistry.getRegisteredCars().forEach(this::printCurrentPosition);
-            System.out.println();
+            results.add(RoundResult.of(carRegistry.getRegisteredCars()));
         }
 
-        List<Car> winners = getWinners();
-
-        System.out.println(winners.stream().map(Car::getName).collect(Collectors.joining(", ")) + "가 최종 우승했습니다.");
+        return results;
     }
 
     public List<Car> getWinners() {
@@ -46,11 +50,10 @@ public class Game {
         return carRegistry;
     }
 
-    private void printCurrentPosition(Car car) {
-        System.out.println(car.getName() + " : " + buildProgressBar(car.getPosition()));
-    }
-
-    private String buildProgressBar(int value) {
-        return "-".repeat(Math.max(0, value));
+    public void registerCars(List<String> names) {
+        for (String name : names) {
+            Car car = Car.of(name);
+            carRegistry.register(car);
+        }
     }
 }

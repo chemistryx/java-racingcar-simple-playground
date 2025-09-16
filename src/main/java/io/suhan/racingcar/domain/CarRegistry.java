@@ -1,4 +1,4 @@
-package io.suhan.racingcar;
+package io.suhan.racingcar.domain;
 
 import java.util.ArrayList;
 import java.util.List;

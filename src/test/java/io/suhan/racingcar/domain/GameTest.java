@@ -1,4 +1,4 @@
-package io.suhan.racingcar;
+package io.suhan.racingcar.domain;
 
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
