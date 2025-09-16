@@ -1,6 +1,7 @@
 package io.suhan.racingcar;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Game {
     private final CarRegistry carRegistry;
@@ -19,11 +20,17 @@ public class Game {
         return new Game(rounds);
     }
 
-    public void start() {
+    public void execute() {
+        System.out.println("\n실행 결과");
         for (int i = 0; i < this.rounds; i++) {
             carRegistry.moveCars();
+            carRegistry.getRegisteredCars().forEach(this::printCurrentPosition);
+            System.out.println();
         }
-        // TODO: 우승자 출력
+
+        List<Car> winners = getWinners();
+
+        System.out.println(winners.stream().map(Car::getName).collect(Collectors.joining(", ")) + "가 최종 우승했습니다.");
     }
 
     public List<Car> getWinners() {
@@ -37,5 +44,13 @@ public class Game {
 
     public CarRegistry getCarRegistry() {
         return carRegistry;
+    }
+
+    private void printCurrentPosition(Car car) {
+        System.out.println(car.getName() + " : " + buildProgressBar(car.getPosition()));
+    }
+
+    private String buildProgressBar(int value) {
+        return "-".repeat(Math.max(0, value));
     }
 }

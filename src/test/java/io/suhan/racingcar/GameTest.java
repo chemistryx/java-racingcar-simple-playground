@@ -47,7 +47,7 @@ public class GameTest {
         List<String> expectedNames = List.of("neo", "brown");
 
         // when
-        game.start();
+        game.execute();
         List<String> winnerNames = game.getWinners().stream().map(Car::getName).toList();
 
         // then

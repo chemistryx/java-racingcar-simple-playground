@@ -2,6 +2,7 @@ package io.suhan.racingcar;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import io.suhan.racingcar.generator.FixedNumberGenerator;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -42,5 +43,12 @@ public class CarTest {
         int position = car.getPosition();
 
         assertEquals(0, position);
+    }
+
+    @Test
+    void 자동차의_이름은_5자_이하만_가능하다() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Car car = Car.of("123456");
+        });
     }
 }

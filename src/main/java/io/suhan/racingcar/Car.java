@@ -5,6 +5,7 @@ import io.suhan.racingcar.generator.RandomNumberGenerator;
 
 public class Car {
     private static final int CAR_MOVE_THRESHOLD = 4;
+    private static final int CAR_NAME_MAXIMUM_LENGTH = 5;
 
     private final String name;
     private final NumberGenerator generator;
@@ -17,10 +18,11 @@ public class Car {
     }
 
     public static Car of(String name) {
-        return new Car(name, new RandomNumberGenerator());
+        return Car.of(name, new RandomNumberGenerator());
     }
 
     public static Car of(String name, NumberGenerator generator) {
+        if (name.length() > CAR_NAME_MAXIMUM_LENGTH) throw new IllegalArgumentException("Car name length must be shorter than " + CAR_NAME_MAXIMUM_LENGTH);
         return new Car(name, generator);
     }
 
