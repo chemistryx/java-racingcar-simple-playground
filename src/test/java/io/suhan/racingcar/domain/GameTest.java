@@ -1,6 +1,7 @@
 package io.suhan.racingcar.domain;
 
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import io.suhan.racingcar.generator.FixedNumberGenerator;
 import java.util.List;
@@ -52,5 +53,10 @@ public class GameTest {
 
         // then
         assertIterableEquals(expectedNames, winnerNames);
+    }
+
+    @Test
+    void 시도_횟수는_1_이상만_가능하다() {
+        assertThrows(IllegalArgumentException.class, () -> Game.of(0));
     }
 }
