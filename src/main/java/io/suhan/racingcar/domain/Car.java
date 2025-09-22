@@ -48,4 +48,11 @@ public class Car {
     public int getPosition() {
         return position;
     }
+
+    public Car copy() {
+        Car copy = Car.of(this.name, this.generator);
+        copy.position = this.position;
+
+        return copy;
+    }
 }

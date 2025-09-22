@@ -31,7 +31,8 @@ public class Game {
 
         for (int i = 0; i < rounds; i++) {
             carManager.moveCars();
-            results.add(RoundResult.of(carManager.getRegisteredCars()));
+            RoundResult result = RoundResult.of(carManager.getRegisteredCars());
+            results.add(result);
         }
 
         return results;
