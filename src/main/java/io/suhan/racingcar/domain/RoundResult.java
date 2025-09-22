@@ -12,7 +12,7 @@ public class RoundResult {
 
     public static RoundResult of(List<Car> cars) {
         List<Car> copied = cars.stream().map(Car::copy).collect(Collectors.toList());
-        
+
         return new RoundResult(copied);
     }
 

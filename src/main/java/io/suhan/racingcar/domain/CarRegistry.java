@@ -3,15 +3,15 @@ package io.suhan.racingcar.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarManager {
+public class CarRegistry {
     private final List<Car> cars;
 
-    private CarManager() {
+    private CarRegistry() {
         this.cars = new ArrayList<>();
     }
 
-    public static CarManager of() {
-        return new CarManager();
+    public static CarRegistry of() {
+        return new CarRegistry();
     }
 
     public void register(Car car) {

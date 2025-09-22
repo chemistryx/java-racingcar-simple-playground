@@ -6,11 +6,11 @@ import java.util.List;
 public class Game {
     private static final int GAME_ROUNDS_MINIMUM = 1;
 
-    private final CarManager carManager;
+    private final CarRegistry carRegistry;
     private final int rounds;
 
     private Game(int rounds) {
-        this.carManager = CarManager.of();
+        this.carRegistry = CarRegistry.of();
         this.rounds = rounds;
     }
 
@@ -30,8 +30,8 @@ public class Game {
         List<RoundResult> results = new ArrayList<>();
 
         for (int i = 0; i < rounds; i++) {
-            carManager.moveCars();
-            RoundResult result = RoundResult.of(carManager.getRegisteredCars());
+            carRegistry.moveCars();
+            RoundResult result = RoundResult.of(carRegistry.getRegisteredCars());
             results.add(result);
         }
 
@@ -39,10 +39,10 @@ public class Game {
     }
 
     public List<Car> getWinners() {
-        return carManager.getCarsWithBestPosition();
+        return carRegistry.getCarsWithBestPosition();
     }
 
-    public CarManager getCarManager() {
-        return carManager;
+    public CarRegistry getCarRegistry() {
+        return carRegistry;
     }
 }
