@@ -13,7 +13,7 @@ public class Main {
         int count = InputView.getTrialsCount();
 
         Game game = Game.of(count);
-        game.registerCars(names);
+        game.getCarManager().registerCars(names);
 
         List<RoundResult> results = game.execute();
         List<Car> winners = game.getWinners();

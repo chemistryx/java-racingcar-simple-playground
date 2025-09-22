@@ -3,15 +3,15 @@ package io.suhan.racingcar.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarRegistry {
+public class CarManager {
     private final List<Car> cars;
 
-    private CarRegistry() {
+    private CarManager() {
         this.cars = new ArrayList<>();
     }
 
-    public static CarRegistry of() {
-        return new CarRegistry();
+    public static CarManager of() {
+        return new CarManager();
     }
 
     public void register(Car car) {
@@ -26,6 +26,22 @@ public class CarRegistry {
         for (Car car : cars) {
             car.move();
         }
+    }
+
+    public void registerCars(List<String> names) {
+        for (String name : names) {
+            Car car = Car.of(name);
+            cars.add(car);
+        }
+    }
+
+    public List<Car> getCarsWithBestPosition() {
+        int bestPosition = getBestPosition();
+
+        return getRegisteredCars()
+                .stream()
+                .filter((car) -> car.getPosition() == bestPosition)
+                .toList();
     }
 
     public int getBestPosition() {

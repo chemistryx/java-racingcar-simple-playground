@@ -6,11 +6,11 @@ import java.util.List;
 public class Game {
     private static final int GAME_ROUNDS_MINIMUM = 1;
 
-    private final CarRegistry carRegistry;
+    private final CarManager carManager;
     private final int rounds;
 
     private Game(int rounds) {
-        this.carRegistry = CarRegistry.of();
+        this.carManager = CarManager.of();
         this.rounds = rounds;
     }
 
@@ -20,7 +20,7 @@ public class Game {
 
     public static Game of(int rounds) {
         if (rounds < GAME_ROUNDS_MINIMUM) {
-            throw new IllegalArgumentException("시도 회수는 " + GAME_ROUNDS_MINIMUM + " 이상이어야 합니다.");
+            throw new IllegalArgumentException("시도 횟수는 " + GAME_ROUNDS_MINIMUM + " 이상이어야 합니다.");
         }
 
         return new Game(rounds);
@@ -30,30 +30,18 @@ public class Game {
         List<RoundResult> results = new ArrayList<>();
 
         for (int i = 0; i < rounds; i++) {
-            carRegistry.moveCars();
-            results.add(RoundResult.of(carRegistry.getRegisteredCars()));
+            carManager.moveCars();
+            results.add(RoundResult.of(carManager.getRegisteredCars()));
         }
 
         return results;
     }
 
     public List<Car> getWinners() {
-        int bestPosition = carRegistry.getBestPosition();
-
-        return carRegistry.getRegisteredCars()
-                .stream()
-                .filter((car) -> car.getPosition() == bestPosition)
-                .toList();
+        return carManager.getCarsWithBestPosition();
     }
 
-    public CarRegistry getCarRegistry() {
-        return carRegistry;
-    }
-
-    public void registerCars(List<String> names) {
-        for (String name : names) {
-            Car car = Car.of(name);
-            carRegistry.register(car);
-        }
+    public CarManager getCarManager() {
+        return carManager;
     }
 }

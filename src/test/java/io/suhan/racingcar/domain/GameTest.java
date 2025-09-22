@@ -18,13 +18,9 @@ public class GameTest {
 
         Game game = Game.of();
 
-        for (String name : names) {
-            Car car = Car.of(name);
+        game.getCarManager().registerCars(names);
 
-            game.getCarRegistry().register(car);
-        }
-
-        List<String> registeredNames = game.getCarRegistry().getRegisteredCars().stream().map(Car::getName).toList();
+        List<String> registeredNames = game.getCarManager().getRegisteredCars().stream().map(Car::getName).toList();
 
         assertIterableEquals(names, registeredNames);
     }
@@ -41,9 +37,9 @@ public class GameTest {
         Car brie = Car.of("brie", stopGenerator);
         Car brown = Car.of("brown", forwardGenerator);
 
-        game.getCarRegistry().register(neo);
-        game.getCarRegistry().register(brie);
-        game.getCarRegistry().register(brown);
+        game.getCarManager().register(neo);
+        game.getCarManager().register(brie);
+        game.getCarManager().register(brown);
 
         List<String> expectedNames = List.of("neo", "brown");
 
