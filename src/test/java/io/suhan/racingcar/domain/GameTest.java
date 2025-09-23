@@ -1,5 +1,6 @@
 package io.suhan.racingcar.domain;
 
+import static io.suhan.racingcar.domain.Car.CAR_MOVE_THRESHOLD;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -30,8 +31,8 @@ public class GameTest {
         // given
         Game game = Game.of(5);
 
-        FixedNumberGenerator forwardGenerator = new FixedNumberGenerator(4);
-        FixedNumberGenerator stopGenerator = new FixedNumberGenerator(3);
+        FixedNumberGenerator forwardGenerator = new FixedNumberGenerator(CAR_MOVE_THRESHOLD);
+        FixedNumberGenerator stopGenerator = new FixedNumberGenerator(CAR_MOVE_THRESHOLD - 1);
 
         Car neo = Car.of("neo", forwardGenerator);
         Car brie = Car.of("brie", stopGenerator);

@@ -4,8 +4,8 @@ import io.suhan.racingcar.generator.NumberGenerator;
 import io.suhan.racingcar.generator.RandomNumberGenerator;
 
 public class Car {
-    private static final int CAR_MOVE_THRESHOLD = 4;
-    private static final int CAR_NAME_MAXIMUM_LENGTH = 5;
+    public static final int CAR_MOVE_THRESHOLD = 4;
+    public static final int CAR_NAME_MAXIMUM_LENGTH = 5;
 
     private final String name;
     private final NumberGenerator generator;

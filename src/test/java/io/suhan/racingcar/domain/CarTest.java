@@ -1,5 +1,6 @@
 package io.suhan.racingcar.domain;
 
+import static io.suhan.racingcar.domain.Car.CAR_MOVE_THRESHOLD;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,7 +24,7 @@ public class CarTest {
 
     @Test
     void 생성된_값이_4_이상일_경우_자동차가_움직일_수_있다() {
-        FixedNumberGenerator generator = new FixedNumberGenerator(4);
+        FixedNumberGenerator generator = new FixedNumberGenerator(CAR_MOVE_THRESHOLD);
         Car car = Car.of("neo", generator);
 
         car.move();
@@ -35,7 +36,7 @@ public class CarTest {
 
     @Test
     void 생성된_값이_3_이하일_경우_자동차가_멈춘다() {
-        FixedNumberGenerator generator = new FixedNumberGenerator(3);
+        FixedNumberGenerator generator = new FixedNumberGenerator(CAR_MOVE_THRESHOLD - 1);
         Car car = Car.of("neo", generator);
 
         car.move();
